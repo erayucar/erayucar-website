@@ -17,7 +17,9 @@ export const metadata: Metadata = {
   description: "Fullstack blockchain developer and web3 specialist with expertise in React, Next.js and Three.js",
   viewport: "width=device-width, initial-scale=1, maximum-scale=1",
   icons: {
-    icon: '/favicon.ico',
+    icon: '/favicon.JPG',
+    apple: '/favicon.JPG',
+    shortcut: '/favicon.JPG',
   },
 };
 
