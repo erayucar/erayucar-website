@@ -24,7 +24,7 @@ const projects: Project[] = [
   {
     id: "rudolph-ai",
     title: "Rudolph Web3 Game",
-    description: "Interactive leaderboard system for AI competitions with real-time updates and data visualization.",
+    description: "Interactive leaderboard system for a Web3 game, showcasing real-time data and user engagement. Built with React and integrated with Solana blockchain.",
     image: "/projects/rudolph-banner.png",
     url: "https://rudolphai.com/leaderboard",
     tags: ["React", "Web3", "Dashboard", "dApp","Solana","Blockchain"],
@@ -32,10 +32,10 @@ const projects: Project[] = [
   {
     id: "vaultech",
     title: "Vaultech Digital",
-    description: "Premium website for a game development and blockchain company featuring 3D elements and modern UI/UX design.",
+    description: "Premium website with modern UI/UX design for a game development and blockchain company",
     image: "/projects/vaultech.png",
     url: "https://vaultechdigital.com/",
-    tags: ["Three.js", "3D Design", "Animation", "Corporate"],
+    tags: ["Animation", "Corporate"],
   },
   {
     id: "mako-food",
