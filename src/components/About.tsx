@@ -49,8 +49,11 @@ const About = () => {
     ];
 
     return (
-        <section id="about" className="py-20 sm:py-24 text-white bg-gradient-to-b from-black via-gray-900/50 to-black px-4 sm:px-6">
-            <div className="max-w-4xl mx-auto">
+        <section id="about" className="relative overflow-hidden py-20 sm:py-24 text-white bg-gradient-to-b from-black via-gray-900/50 to-black px-4 sm:px-6">
+            <div className="absolute -top-20 -left-40 w-72 h-72 bg-purple-700/10 rounded-full blur-3xl animate-blob"></div>
+            <div className="absolute -bottom-20 -right-40 w-72 h-72 bg-blue-700/10 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+            
+            <div className="relative z-10 max-w-4xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
