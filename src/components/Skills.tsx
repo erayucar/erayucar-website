@@ -3,7 +3,8 @@
 import { useRef } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { FaReact, FaNodeJs, FaEthereum, FaRust } from "react-icons/fa";
-import { TbBrandNextjs, TbBrandThreejs } from "react-icons/tb";
+import { TbBrandNextjs } from "react-icons/tb";
+import { SiPython, SiApachekafka, SiSnowflake } from "react-icons/si";
 
 interface Skill {
     name: string;
@@ -38,9 +39,19 @@ const skills: Skill[] = [
         description: "I use Rust for Web3 applications"
     },
     { 
-        name: "Three.js", 
-        icon: <TbBrandThreejs className="text-green-400" size={40} />,
-        description: "I create 3D web experiences"
+        name: "Python", 
+        icon: <SiPython className="text-blue-400" size={40} />,
+        description: "I use Python for backend and data tasks"
+    },
+    { 
+        name: "Kafka", 
+        icon: <SiApachekafka className="text-white" size={40} />,
+        description: "I use Kafka for event-driven architectures"
+    },
+    { 
+        name: "Snowflake", 
+        icon: <SiSnowflake className="text-cyan-300" size={40} />,
+        description: "I use Snowflake for data warehousing"
     },
 ];
 
