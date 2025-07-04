@@ -4,9 +4,10 @@ import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 
 const titles = [
-    "Fullstack Developer 💻",
-    "Blockchain Specialist ⛓️",
-    "Next.js Ninja ⚔️",
+    "Web3 / AI Full‑Stack Developer",
+    "AI Agent Developer",
+    "Data Pipeline Engineer",
+    "Smart Contract Specialist"
 ];
 
 interface GlowingButtonProps {
@@ -97,20 +98,24 @@ export default function Hero() {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const current = titles[index];
-        setText((prev) =>
-            isDeleting ? current.substring(0, prev.length - 1) : current.substring(0, prev.length + 1)
-        );
+        const handleTyping = () => {
+            const current = titles[index];
+            if (isDeleting) {
+                setText((prev) => prev.substring(0, prev.length - 1));
+            } else {
+                setText((prev) => current.substring(0, prev.length + 1));
+            }
 
-        if (!isDeleting && text === current) {
-            setTimeout(() => setIsDeleting(true), 1000);
-        } else if (isDeleting && text === "") {
-            setIsDeleting(false);
-            setIndex((index + 1) % titles.length);
-        }
+            if (!isDeleting && text === current) {
+                setTimeout(() => setIsDeleting(true), 2000);
+            } else if (isDeleting && text === "") {
+                setIsDeleting(false);
+                setIndex((prevIndex) => (prevIndex + 1) % titles.length);
+            }
+        };
 
-        const speed = isDeleting ? 50 : 100;
-        const timer = setTimeout(() => {}, speed);
+        const speed = isDeleting ? 75 : 150;
+        const timer = setTimeout(handleTyping, speed);
 
         return () => clearTimeout(timer);
     }, [text, isDeleting, index]);
@@ -161,8 +166,10 @@ export default function Hero() {
                 
                 <motion.h2
                     className="text-lg sm:text-xl md:text-3xl mt-4 sm:mt-6 font-medium h-8 sm:h-10"
-                    animate={{ opacity: [0, 1, 0.8, 1] }}
-                    transition={{ duration: 1, repeat: Infinity }}
+                    key={index}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
                 >
                     {text}
                     <span className="text-purple-400 animate-blink">|</span>

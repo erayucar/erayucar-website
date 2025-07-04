@@ -1,127 +1,127 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-
-const TiltCard = ({ children }: { children: React.ReactNode }) => {
-    const cardRef = useRef<HTMLDivElement>(null);
-    const [isHovered, setIsHovered] = useState(false);
-    
-    // Motion values for tilt effect
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-    
-    // Spring physics for smooth movement
-    const xSpring = useSpring(x, { stiffness: 150, damping: 15 });
-    const ySpring = useSpring(y, { stiffness: 150, damping: 15 });
-    
-    // Transform values
-    const rotateX = useTransform(ySpring, [-100, 100], [10, -10]);
-    const rotateY = useTransform(xSpring, [-100, 100], [-10, 10]);
-    const scale = useSpring(isHovered ? 1.05 : 1, { stiffness: 200, damping: 20 });
-    
-    const handleMouseMove = (e: React.MouseEvent) => {
-        // Only enable tilt effect on larger screens
-        if (window.innerWidth < 768 || !cardRef.current) return;
-        
-        const rect = cardRef.current.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        
-        const mouseX = e.clientX - centerX;
-        const mouseY = e.clientY - centerY;
-        
-        x.set(mouseX);
-        y.set(mouseY);
-    };
-    
-    const handleMouseLeave = () => {
-        x.set(0);
-        y.set(0);
-        setIsHovered(false);
-    };
-    
-    return (
-        <motion.div
-            ref={cardRef}
-            style={{ 
-                rotateX, 
-                rotateY, 
-                transformStyle: "preserve-3d",
-                scale
-            }}
-            className="relative w-full max-w-3xl bg-gradient-to-br from-gray-900 via-purple-900/30 to-gray-900 p-4 sm:p-6 md:p-8 rounded-2xl shadow-2xl border border-purple-600/20"
-            onMouseMove={handleMouseMove}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={handleMouseLeave}
-        >
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-600/10 to-transparent opacity-50" 
-                style={{ transform: "translateZ(-10px)" }} />
-            
-            <div className="absolute inset-0 rounded-2xl overflow-hidden">
-                <div className="absolute -inset-[100%] bg-[radial-gradient(circle_at_50%_50%,rgba(145,94,255,0.15),transparent_65%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" 
-                    style={{ transform: `translate(${x.get() / 5}px, ${y.get() / 5}px)` }} />
-            </div>
-            
-            <div style={{ transform: "translateZ(20px)" }}>
-                {children}
-            </div>
-        </motion.div>
-    );
-};
+import { motion } from "framer-motion";
+import { FaBolt, FaProjectDiagram, FaStar } from "react-icons/fa";
 
 const About = () => {
+    const coreSkills = [
+        {
+            title: "AI Agent",
+            description: "Built real‑time Twitter scoring bot (Python + Node). Rule filter → ONNX‑optimised LLM (OpenAI/Claude) → USDT reward trigger.",
+        },
+        {
+            title: "Data Pipeline",
+            description: "Kafka → Snowflake (sub‑2s latency). Redis cache, micro‑batch ETL.",
+        },
+        {
+            title: "Smart Contracts",
+            description: "Solidity (Hardhat/Truffle) on Ethereum & Tron.",
+        },
+        {
+            title: "Backend",
+            description: "Nest.js, Express, AWS Lambda, Serverless Framework.",
+        },
+        {
+            title: "Frontend",
+            description: "React, Next.js, TypeScript, Tailwind, Three.js.",
+        },
+        {
+            title: "DevOps",
+            description: "Docker, GitLab CI/CD, Bitbucket Pipelines, Terraform.",
+        },
+    ];
+
+    const keyTechs = ["React", "Next.js", "Node", "Nest", "Python", "Kafka", "Redis", "Snowflake", "Solidity", "ONNX", "OpenAI/Claude", "AWS", "Docker"];
+    
+    const achievements = [
+        {
+            icon: <FaBolt className="text-yellow-400" />,
+            text: "30k msg/min tweet pipeline, latency < 250 ms."
+        },
+        {
+            icon: <FaProjectDiagram className="text-green-400" />,
+            text: "Encrypted OAuth flow, GDPR purge < 60 s."
+        },
+        {
+            icon: <FaStar className="text-blue-400" />,
+            text: "MEV bot/anomaly detection module (Kafka Streams)."
+        }
+    ];
+
     return (
-        <section id="about" className="min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 py-16 sm:py-24 text-white bg-gradient-to-b from-black/80 via-purple-950/10 to-black/80 relative">
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute -top-40 -right-40 w-72 sm:w-96 h-72 sm:h-96 bg-purple-700/10 rounded-full blur-3xl"></div>
-                <div className="absolute -bottom-40 -left-40 w-72 sm:w-96 h-72 sm:h-96 bg-blue-700/10 rounded-full blur-3xl"></div>
-            </div>
-            
-            <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="text-center mb-8 md:mb-12 relative"
-            >
-                <h2 className="text-3xl sm:text-4xl font-bold inline-block bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent mb-2">About Me</h2>
+        <section id="about" className="py-20 sm:py-24 text-white bg-gradient-to-b from-black via-gray-900/50 to-black px-4 sm:px-6">
+            <div className="max-w-4xl mx-auto">
                 <motion.div
-                    className="h-0.5 sm:h-1 w-0 bg-gradient-to-r from-purple-400 to-pink-500 mx-auto"
-                    animate={{ width: "120px" }}
-                    transition={{ duration: 1, delay: 0.3 }}
-                />
-            </motion.div>
-            
-            <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                viewport={{ once: true, margin: "-100px" }}
-                className="w-full max-w-3xl"
-            >
-                <TiltCard>
-                    <div className="space-y-4 sm:space-y-6">
-                        <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
-                            I&apos;m <span className="text-purple-400 font-medium">Eray Uçar</span>, a
-                            <strong className="text-white"> Fullstack Blockchain Developer</strong> focused on Web3. I develop modern applications 
-                            using technologies such as Next.js, NestJS, Solidity, and Rust.
-                        </p>
-                        
-                        <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
-                            I&apos;m also passionate about <span className="text-cyan-400 font-medium">3D and interactive interfaces</span>. 
-                            I enjoy using Three.js and WebGL technologies to make user experiences special and impressive.
-                        </p>
-                        
-                        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 pt-2 sm:pt-4">
-                            {["React", "Next.js", "Three.js", "Node.js", "Solidity", "Web3"].map((tech) => (
-                                <span key={tech} className="px-3 sm:px-4 py-1.5 sm:py-2 bg-purple-900/30 rounded-full text-xs sm:text-sm border border-purple-500/20">
-                                    {tech}
-                                </span>
-                            ))}
-                        </div>
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    className="text-center mb-12"
+                >
+                    <h2 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent mb-2">
+                        Core Skills & Responsibilities
+                    </h2>
+                    <p className="text-gray-400">A snapshot of my technical expertise.</p>
+                </motion.div>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                    {coreSkills.map((skill, index) => (
+                        <motion.div
+                            key={skill.title}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            viewport={{ once: true }}
+                            className="bg-gray-900/50 border border-purple-500/20 rounded-lg p-6 hover:border-purple-500/50 transition-colors duration-300"
+                        >
+                            <h3 className="font-bold text-lg text-white mb-2">{skill.title}</h3>
+                            <p className="text-gray-400 text-sm">{skill.description}</p>
+                        </motion.div>
+                    ))}
+                </div>
+
+                <motion.div 
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.4 }}
+                    viewport={{ once: true }}
+                    className="text-center mb-16"
+                >
+                    <h3 className="text-2xl font-bold text-white mb-4">Key Technologies</h3>
+                    <div className="flex flex-wrap justify-center gap-2">
+                        {keyTechs.map(tech => (
+                            <span key={tech} className="bg-gray-800 text-gray-300 text-xs font-medium px-3 py-1.5 rounded-full border border-gray-700">
+                                {tech}
+                            </span>
+                        ))}
                     </div>
-                </TiltCard>
-            </motion.div>
+                </motion.div>
+                
+                <motion.div 
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.6 }}
+                    viewport={{ once: true }}
+                    className="text-center"
+                >
+                    <h3 className="text-2xl font-bold text-white mb-6">Highlighted Achievements</h3>
+                    <div className="space-y-4 max-w-lg mx-auto">
+                        {achievements.map((achievement, index) => (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.5, delay: index * 0.2 + 0.6 }}
+                                viewport={{ once: true }}
+                                className="flex items-center gap-4 bg-gray-900/50 border border-purple-500/20 rounded-lg p-4"
+                            >
+                                <div className="text-2xl">{achievement.icon}</div>
+                                <p className="text-gray-300">{achievement.text}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </motion.div>
+            </div>
         </section>
     );
 };
