@@ -14,6 +14,22 @@ interface Project {
 
 const projects: Project[] = [
   {
+    id: "gamecup",
+    title: "GameCup.io",
+    description: "The ultimate Web3 platform for competitive gamers to join tournaments and win crypto rewards. Built with real-time tournament system and Solana blockchain integration.",
+    image: "/projects/gamecup.png",
+    url: "https://gamecup.io/",
+    tags: ["Web3", "Solana", "Gaming", "Tournaments", "Crypto Rewards", "Real-time"],
+  },
+  {
+    id: "oxskyt",
+    title: "OXS KYT",
+    description: "Advanced crypto wallet risk assessment platform with real-time blockchain analysis. Provides detailed risk scoring for cryptocurrency wallets with multi-chain support.",
+    image: "/projects/oxskyt.png",
+    url: "https://oxskyt.com/",
+    tags: ["Web3", "Blockchain", "Risk Assessment", "Crypto Analytics", "Multi-chain", "Security"],
+  },
+  {
     id: "oxs-games",
     title: "OXS Games Dashboard",
     description: "A feature-rich gaming dashboard with asset management and game analytics. Built with Next.js and integrated blockchain functionalities.",
