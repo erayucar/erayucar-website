@@ -2,74 +2,8 @@
 
 import { useRef } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
-
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  url: string;
-  tags: string[];
-}
-
-const projects: Project[] = [
-  {
-    id: "midocu-crm",
-    title: "Midocu CRM Platform",
-    description: "Enterprise-grade CRM system for interior design businesses. Multi-tenant architecture with customer portal, admin dashboard, field agent mobile app, AI-powered design visualization, quote management, and real-time collaboration. Currently in active development.",
-    image: "/projects/midocu-crm-banner.png",
-    url: "#",
-    tags: ["Next.js", "FastAPI", "PostgreSQL", "Redis", "AI/ML", "Multi-tenant", "In Development"],
-  },
-  {
-    id: "midocu-cli",
-    title: "Midocu Deployment CLI",
-    description: "Secure enterprise deployment tool for Midocu platform. Features RAM-only secrets storage, Argon2 password hashing, license validation, Docker orchestration, and GitHub releases integration with auto-updates. Currently in active development.",
-    image: "/projects/midocu-cli-banner.png",
-    url: "#",
-    tags: ["Python", "Docker", "DevOps", "Security", "CLI", "In Development"],
-  },
-  {
-    id: "gamecup",
-    title: "GameCup.io",
-    description: "The ultimate Web3 platform for competitive gamers to join tournaments and win crypto rewards. Built with real-time tournament system and Solana blockchain integration.",
-    image: "/projects/gamecup.png",
-    url: "https://app.gamecup.io/",
-    tags: ["Web3", "Solana", "Gaming", "Tournaments", "Crypto Rewards", "Real-time"],
-  },
-  {
-    id: "oxskyt",
-    title: "OXS KYT",
-    description: "Advanced crypto wallet risk assessment platform with real-time blockchain analysis. Provides detailed risk scoring for cryptocurrency wallets with multi-chain support.",
-    image: "/projects/oxskyt.png",
-    url: "https://oxskyt.com/",
-    tags: ["Web3", "Blockchain", "Risk Assessment", "Crypto Analytics", "Multi-chain", "Security"],
-  },
-  {
-    id: "oxs-games",
-    title: "OXS Games Dashboard",
-    description: "A feature-rich gaming dashboard with asset management and game analytics. Built with Next.js and integrated blockchain functionalities.",
-    image: "/projects/speedverse-dashboard-banner.png",
-    url: "#",
-    tags: ["Next.js", "Dashboard", "Blockchain", "Web3"],
-  },
-  {
-    id: "rudolph-ai",
-    title: "Rudolph Web3 Game",
-    description: "Interactive leaderboard system for a Web3 game, showcasing real-time data and user engagement. Built with React and integrated with Solana blockchain.",
-    image: "/projects/rudolph-banner.png",
-    url: "#",
-    tags: ["React", "Web3", "Dashboard", "dApp","Solana","Blockchain"],
-  },
-  {
-    id: "mako-food",
-    title: "Mako Food Trading",
-    description: "Professional website for an international food distribution company with elegant animations and responsive design.",
-    image: "/projects/makofood-banner.png",
-    url: "https://makofood.com/",
-    tags: ["E-commerce", "Animation", "Responsive", "Business"],
-  },
-];
+import Link from "next/link";
+import { projects, Project } from "@/data/projects";
 
 interface ProjectCardProps {
   project: Project;
@@ -116,88 +50,96 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
       transition={{ duration: 0.7, delay: index * 0.15 }}
       viewport={{ once: true, margin: "-50px" }}
     >
-      <motion.a
-        href={project.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block h-full"
-        style={{
-          rotateX,
-          rotateY,
-          transformStyle: "preserve-3d",
-        }}
-        whileHover={{ scale: 1.02 }}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-      >
-        <div className="relative bg-gradient-to-br from-gray-900/80 via-gray-900 to-black/90 rounded-2xl border border-purple-500/10 overflow-hidden h-full shadow-xl">
-          {/* Project Image */}
-          <div className="relative h-48 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-b from-purple-600/20 to-transparent mix-blend-overlay z-10" />
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
-              <div className="w-16 h-16 rounded-full bg-purple-600/20 animate-pulse" />
-            </div>
-            {project.image && (
-              <div
-                className="relative h-full w-full"
-                style={{ transform: "translateZ(10px)" }}
-              >
-                <div
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{
-                    backgroundImage: `url(${project.image})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                  }}
-                />
+      {/* Link to project detail page instead of external URL */}
+      <Link href={`/projects/${project.id}`} className="block h-full">
+        <motion.div
+          className="block h-full cursor-pointer"
+          style={{
+            rotateX,
+            rotateY,
+            transformStyle: "preserve-3d",
+          }}
+          whileHover={{ scale: 1.02 }}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+        >
+          <div className="relative bg-gradient-to-br from-gray-900/80 via-gray-900 to-black/90 rounded-2xl border border-purple-500/10 overflow-hidden h-full shadow-xl">
+            {/* Project Image */}
+            <div className="relative h-48 overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-b from-purple-600/20 to-transparent mix-blend-overlay z-10" />
+              <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
+                <div className="w-16 h-16 rounded-full bg-purple-600/20 animate-pulse" />
               </div>
-            )}
-          </div>
-
-          {/* Project Content */}
-          <div className="p-6" style={{ transform: "translateZ(20px)" }}>
-            <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-            <p className="text-gray-400 text-sm mb-4">{project.description}</p>
-
-            <div className="flex flex-wrap gap-2 mt-auto">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-2 py-1 bg-purple-900/30 rounded-full text-xs text-purple-300 border border-purple-500/20"
+              {project.image && (
+                <div
+                  className="relative h-full w-full"
+                  style={{ transform: "translateZ(10px)" }}
                 >
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            <div className="mt-5 flex justify-between items-center">
-              <motion.span
-                className="inline-flex items-center text-sm text-purple-400 font-medium"
-                whileHover={{ x: 3 }}
-              >
-                Visit Project
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4 ml-1"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  <div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{
+                      backgroundImage: `url(${project.image})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
                   />
-                </svg>
-              </motion.span>
+                </div>
+              )}
             </div>
-          </div>
 
-          {/* Overlay for hover effect */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-purple-600/10 via-transparent to-blue-600/5 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
-        </div>
-      </motion.a>
+            {/* Project Content */}
+            <div className="p-6" style={{ transform: "translateZ(20px)" }}>
+              <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+              {/* Truncate description for card view */}
+              <p className="text-gray-400 text-sm mb-4 line-clamp-3">{project.description}</p>
+
+              {/* Show only first 4 tags to keep card clean */}
+              <div className="flex flex-wrap gap-2 mt-auto">
+                {project.tags.slice(0, 4).map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-2 py-1 bg-purple-900/30 rounded-full text-xs text-purple-300 border border-purple-500/20"
+                  >
+                    {tag}
+                  </span>
+                ))}
+                {/* Show +N more if there are additional tags */}
+                {project.tags.length > 4 && (
+                  <span className="px-2 py-1 bg-gray-800/50 rounded-full text-xs text-gray-400">
+                    +{project.tags.length - 4}
+                  </span>
+                )}
+              </div>
+
+              <div className="mt-5 flex justify-between items-center">
+                <motion.span
+                  className="inline-flex items-center text-sm text-purple-400 font-medium"
+                  whileHover={{ x: 3 }}
+                >
+                  View Details
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4 ml-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    />
+                  </svg>
+                </motion.span>
+              </div>
+            </div>
+
+            {/* Overlay for hover effect */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-purple-600/10 via-transparent to-blue-600/5 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-2xl pointer-events-none" />
+          </div>
+        </motion.div>
+      </Link>
     </motion.div>
   );
 };
