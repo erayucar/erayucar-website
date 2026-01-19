@@ -14,6 +14,22 @@ interface Project {
 
 const projects: Project[] = [
   {
+    id: "midocu-crm",
+    title: "Midocu CRM Platform",
+    description: "Enterprise-grade CRM system for interior design businesses. Multi-tenant architecture with customer portal, admin dashboard, field agent mobile app, AI-powered design visualization, quote management, and real-time collaboration. Currently in active development.",
+    image: "/projects/midocu-crm-banner.png",
+    url: "#",
+    tags: ["Next.js", "FastAPI", "PostgreSQL", "Redis", "AI/ML", "Multi-tenant", "In Development"],
+  },
+  {
+    id: "midocu-cli",
+    title: "Midocu Deployment CLI",
+    description: "Secure enterprise deployment tool for Midocu platform. Features RAM-only secrets storage, Argon2 password hashing, license validation, Docker orchestration, and GitHub releases integration with auto-updates. Currently in active development.",
+    image: "/projects/midocu-cli-banner.png",
+    url: "#",
+    tags: ["Python", "Docker", "DevOps", "Security", "CLI", "In Development"],
+  },
+  {
     id: "gamecup",
     title: "GameCup.io",
     description: "The ultimate Web3 platform for competitive gamers to join tournaments and win crypto rewards. Built with real-time tournament system and Solana blockchain integration.",
