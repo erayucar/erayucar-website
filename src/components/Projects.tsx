@@ -34,7 +34,7 @@ const projects: Project[] = [
     title: "GameCup.io",
     description: "The ultimate Web3 platform for competitive gamers to join tournaments and win crypto rewards. Built with real-time tournament system and Solana blockchain integration.",
     image: "/projects/gamecup.png",
-    url: "https://gamecup.io/",
+    url: "https://app.gamecup.io/",
     tags: ["Web3", "Solana", "Gaming", "Tournaments", "Crypto Rewards", "Real-time"],
   },
   {
@@ -50,7 +50,7 @@ const projects: Project[] = [
     title: "OXS Games Dashboard",
     description: "A feature-rich gaming dashboard with asset management and game analytics. Built with Next.js and integrated blockchain functionalities.",
     image: "/projects/speedverse-dashboard-banner.png",
-    url: "https://dashboard.oxs.games/login",
+    url: "#",
     tags: ["Next.js", "Dashboard", "Blockchain", "Web3"],
   },
   {
@@ -58,16 +58,8 @@ const projects: Project[] = [
     title: "Rudolph Web3 Game",
     description: "Interactive leaderboard system for a Web3 game, showcasing real-time data and user engagement. Built with React and integrated with Solana blockchain.",
     image: "/projects/rudolph-banner.png",
-    url: "https://rudolphai.com/leaderboard",
+    url: "#",
     tags: ["React", "Web3", "Dashboard", "dApp","Solana","Blockchain"],
-  },
-  {
-    id: "vaultech",
-    title: "Vaultech Digital",
-    description: "Premium website with modern UI/UX design for a game development and blockchain company",
-    image: "/projects/vaultech.png",
-    url: "https://vaultechdigital.com/",
-    tags: ["Animation", "Corporate"],
   },
   {
     id: "mako-food",
